@@ -1,0 +1,101 @@
+//PROBLEM
+
+Given an array arr of size n, the task is to find the maximum triplet product in the array.
+
+
+Example 1:
+
+Input:
+n = 4
+arr[] = {1, 2, 3, 5}
+Output:
+30
+Explanation:
+5*3*2 gives 30. This is the maximum possible
+triplet product in the array.
+Example 2:
+
+Input:
+n = 7
+arr[] = {-3, -5, 1, 0, 8, 3, -2} 
+Output:
+120
+Explanation: 
+-3*-5*8 gives 120. This is the maximum possible triplet product in the array.
+
+Your Task:
+You don't need to read input or print anything. Your task is to complete the function maxTripletProduct() which takes an integer n and an array arr and returns the maximum triplet product in the array.
+
+
+Expected Time Complexity: O(n)
+Expected Auxiliary Space: O(1)
+
+
+Constraints:
+3 ≤ N ≤ 5*105
+-106 ≤ A[i] ≤ 106
+
+
+SOLUTION
+
+//{ Driver Code Starts
+//Initial Template for CPP
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+//User function Template for C++
+
+class Solution {
+  public:
+    long long maxTripletProduct(long long arr[], int n)
+    {
+    	// Complete the function
+    	  sort(arr,arr+n);
+    	  
+     long long int fmaxx=arr[n-1], 
+            smaxx= arr[n-2], 
+           tmaxx= arr[n-3];
+    	  long long int fminn= arr[0],
+             sminn= arr[1];
+    	  
+    	  long long int maxxprod= fmaxx*smaxx*tmaxx;
+    	 
+     long long int minnprod= fminn*sminn;
+    	  
+    	 if (n == 3) return maxxprod;
+    	  
+    	 long long x= minnprod*fmaxx;
+    	 maxxprod=max(maxxprod, x);
+    	  
+       long long y= minnprod*smaxx;
+       maxxprod=max(maxxprod, y);
+    	  
+       long long z= minnprod*tmaxx;
+      maxxprod=max(maxxprod, z);
+    	  
+    	  return maxxprod;
+    }
+};
+
+//{ Driver Code Starts.
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int n,i;
+	    cin>>n; long long arr[n];
+	    for(i=0;i<n;i++)
+	    cin>>arr[i];
+	    Solution ob;
+	    cout <<ob.maxTripletProduct(arr, n);
+	    cout<<"\n";
+	}
+    return 0;
+}
+// } Driver Code Ends
