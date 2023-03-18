@@ -1,0 +1,59 @@
+Given an array A[] of N integers and an integer M. The task is to count the number of subarrays which have median M.
+Median of an array is defined as below:
+
+1. If N is odd, the median value is the number that is in the middle after sorting the array.
+2. if N is even, the median value is the left of the two middle numbers after sorting the array. 
+
+Example 1:
+
+Input:
+N = 5, M = 2
+A[] = {2, 1, 3, 5, 4}
+Output: 
+3
+Explanation: 
+The subarrays which has median equal to M
+are [2], [2,1,3] and [2,1,3,5]
+
+Example 2:
+
+Input:
+N = 1, M = 1
+A[] = {1}
+Output: 
+1
+Explanation: 
+The subarrays which has median equal to M
+is [1].
+
+Your Task: 
+You don't need to read input or print anything. Complete the function countSubarray( ) which takes the integer N , the array A[], and the integer M as input parameters and returns the number of subarays. 
+
+Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(N)
+
+Constraints:
+1 ≤ N ≤ 105
+1 ≤ A[] ≤ 105
+1 ≤ M ≤ N
+
+solution c++
+#include <bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+//User function Template for C++
+class Solution {
+  public:
+  long long helper( int n, const vector< int >& a, int m ) {
+    vector< int > v( 2 * n + 1 ); v[ n ]++;
+    long long x{}, t{}, j{ n };
+    for ( int i{}; i < n; ++i, ++v[ j ] )
+        x += t += a[ i ] >= m ? v[ j++ ] : -v[ --j ];
+    return x;
+}
+long long countSubarray( int N, vector< int > A, int M ) {
+    return helper( N, A, M ) - helper( N, A, ++M );
+}
+    
+};
